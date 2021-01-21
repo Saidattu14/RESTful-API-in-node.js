@@ -19,6 +19,11 @@ app.use(bodyParser.json());
 
 
 routes(app);
+app.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
+});
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
@@ -27,15 +32,12 @@ router.get('/', function(req, res) {
 
 
 
-app.get('/api', router);
+app.use('/api', router);
 
 app.get('/home', function(req, res, next) {
 	res.json({ message: 'This is a Home page' });
 });
-app.get("*",(req,res) => {
-	res.json({ message: 'There is NO such route' });
 
-})
 
 
 app.listen(3001,()=> {
