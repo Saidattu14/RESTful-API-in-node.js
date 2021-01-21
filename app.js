@@ -10,15 +10,15 @@ var bodyParser = require('body-parser');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
+
+
+var router = express.Router(); // get an instance of the express Router
+var routes = require('./lib/model/services.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-var router = express.Router(); // get an instance of the express Router
-var url  = 'https://api.github.com/users';
-
-
-
+routes(app);
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
 
 
 
-app.get('/', router)
+app.get('/api', router);
 
 app.get('/home', function(req, res, next) {
 	res.json({ message: 'This is a Home page' });
