@@ -25,14 +25,14 @@ app.use(function(req, res, next) {
 	next();
 });
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-	res.json({ message: 'Welocme to github user api' });
-});
-
 
 
 app.use('/api', router);
+
+
+app.get('/',(req,res) => {
+	res.json({ message: 'This is the Welcome page and There are /home and /api routes ' });
+})
 
 app.get('/home', function(req, res, next) {
 	res.json({ message: 'This is a Home page' });
@@ -40,6 +40,6 @@ app.get('/home', function(req, res, next) {
 
 
 
-app.listen(3001,()=> {
+app.listen(3004,()=> {
     console.log("Server is listening at port 3001")
 })
